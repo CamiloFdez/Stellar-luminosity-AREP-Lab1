@@ -113,15 +113,53 @@ pip install numpy matplotlib
 ---
 
 ## Results
-First of all we have to make sure that our SageMaker machine is on so we open
+First of all we have to make sure that our SageMaker machine is on so we open our AWS Academy and start the machine, after that we enter to the domain that we previously create and see:
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/aws.PNG)
+
+After that we enter to SageMaker:
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/sagemaker.PNG)
+
+Then we open the visual studio code and upload all the notebooks that we have done.
 
 ### Linear Regression
 
 The linear model captures the overall increasing trend between mass and luminosity but cannot model the strong nonlinear growth. This produces systematic errors at higher masses.
 
+Here are some results from sagemaker:
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/prueba1.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/grafico1.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/grafico2.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/grafico3.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/grafico4.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/grafico5.PNG)
+
 ### Polynomial Regression
 
 Adding the nonlinear (`M^2`) and interaction (`M*T`) features improves the performance significantly. The full model (M3) has the lowest loss, showing the importance of the nonlinear and interaction effects in stellar physics.
+
+Now to see the results we open the notebook 2 and we will see this:
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/graf1.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/graf2.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/graf3.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/grafm1.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/grafm2.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/grafm3.PNG)
+
+![image](https://github.com/CamiloFdez/Stellar-luminosity-AREP-Lab1/blob/main/images/graf4.PNG)
 
 ---
 
@@ -135,6 +173,7 @@ Steps followed:
 2. Uploaded the `.ipynb` files  
 3. Opened each notebook  
 4. Ran all cells successfully  
+
 If you want to see the results they are on the section results
 
 ### Local vs SageMaker
