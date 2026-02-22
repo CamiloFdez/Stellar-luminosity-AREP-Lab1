@@ -1,0 +1,185 @@
+================================================================================
+  TA GRADING REPORT — Stellar Luminosity: Linear & Polynomial Regression
+  Course: Digital Transformation and Enterprise Architecture
+================================================================================
+
+------------------------------------------------------------------------
+SUMMARY
+------------------------------------------------------------------------
+The repository is well-organized and covers both required topics end-to-end.
+Notebook 1 implements linear regression from scratch (hypothesis, MSE, cost
+surface, both loop-based and vectorized gradient computations, and multiple
+learning-rate experiments). Notebook 2 extends the work to polynomial
+regression with interaction features, feature-selection model comparison,
+cost-vs-interaction-weight analysis, and an inference demo. Cloud execution
+is evidenced with screenshots directly in the README. The only notable gap is
+that in Notebook 1 the non-vectorized gradient function (compute_gradients_loop)
+is defined but never wired into a complete non-vectorized training loop, leaving
+that mandatory step only partially satisfied. All other required elements are
+present and correctly implemented.
+
+------------------------------------------------------------------------
+GRADING BREAKDOWN (0.0 – 5.0 scale)
+------------------------------------------------------------------------
+
+1. Repository Structure & Compliance ............... 0.5 / 0.5
+   - README.md present: YES
+   - Two notebooks present (01_part1_linreg_1feature.ipynb,
+     02_part2_polyreg.ipynb): YES
+   - Datasets defined inside notebooks as NumPy arrays: YES
+   - Only allowed libraries used in code (NumPy, Matplotlib): YES
+     (Note: Markdown cells describe "pandas" as a dependency, but it is
+     never imported or used; actual code is fully compliant.)
+   Deductions: none.
+
+2. Notebook 1 – Linear Regression ................. 1.7 / 2.0
+   - Dataset visualization and scatter-plot interpretation: YES
+   - Hypothesis (predict) and MSE functions implemented: YES
+   - Cost surface (3D grid + surface plot + explanation): YES
+   - Correct gradient derivation (math shown, formulas match code): YES
+   - Non-vectorized gradient computation (compute_gradients_loop): YES
+     — however no gradient_descent_loop training run uses it; the function
+     is defined but never called. Full non-vectorized GD execution is absent.
+   - Vectorized gradient descent (gradient_descent_vectorized): YES
+   - Convergence plot and discussion: YES
+   - Multiple learning-rate experiments (alpha = 0.0001, 0.001, 0.01): YES (≥3)
+   - Final fit plot and error discussion: YES
+   - Conceptual questions (meaning of w, limits of linearity): YES
+   Deductions: -0.3 for absent non-vectorized gradient descent training loop.
+
+3. Notebook 2 – Polynomial Regression ............. 1.9 / 2.0
+   - Dataset visualization with temperature color-encoding: YES
+   - Feature engineering [M, T, M², M·T] via NumPy: YES
+   - Vectorized loss (MSE) and gradients: YES
+   - Training and convergence plot (M3): YES
+   - Feature-selection experiment (M1, M2, M3 compared with
+     final-loss printout and predicted-vs-actual plots): YES
+   - Interaction cost analysis (w_MT sweep over ±1 around trained value): YES
+   - Inference demo (M=1.3, T=6600 K) with prediction and reasonableness
+     analysis: YES
+   Deductions: -0.1 for minor gap — the feature-selection section trains all
+   three models but does not produce a side-by-side convergence or loss
+   summary table (convergence is only shown separately for M3 in section 6);
+   a small presentation gap, not a functional one.
+
+4. Cloud Execution Evidence (SageMaker) ............ 0.5 / 0.5
+   - Description of SageMaker execution steps: YES
+   - Screenshot of SageMaker environment (aws.PNG, sagemaker.PNG): YES
+   - Screenshot of successful notebook execution (prueba1.PNG): YES
+   - Multiple output plots shown (grafico1–5.PNG, graf1–4.PNG,
+     grafm1–3.PNG): YES
+   - Brief local vs cloud comparison: YES
+   Deductions: none.
+
+------------------------------------------------------------------------
+FINAL GRADE
+------------------------------------------------------------------------
+Final grade: 4.6 / 5.0
+
+Result: PASS (≥ 3.0)
+
+------------------------------------------------------------------------
+STRENGTHS
+------------------------------------------------------------------------
+- Complete, self-contained notebooks with all datasets hard-coded in NumPy.
+- Cost surface is correctly implemented as a 3D bowl and visually explained.
+- Three distinct learning rates tested and plotted on the same figure for
+  easy comparison.
+- Feature engineering in Notebook 2 is clean and correctly builds
+  [M, T, M², M·T] in a single vectorized expression.
+- Feature-selection experiment (M1/M2/M3) provides concrete loss values and
+  predicted-vs-actual scatter plots for each model.
+- Cost-vs-w_MT sweep is well implemented and interpreted with an identified
+  optimal point.
+- Inference demo includes a full reasonableness analysis anchored to the
+  training data range.
+- SageMaker evidence is thorough: environment screenshots, execution proof,
+  and output plots all included in the README.
+- Conceptual discussion in Notebook 1 correctly cites L ∝ M^3.5 as the
+  physical limit of the linear model.
+
+------------------------------------------------------------------------
+ISSUES & MISSING ELEMENTS
+------------------------------------------------------------------------
+- [Notebook 1] Non-vectorized gradient descent: compute_gradients_loop is
+  defined but never integrated into a training loop. There is no run that
+  trains the model using the loop-based gradients, so the mandatory
+  "non-vectorized gradient descent" step is only half-satisfied.
+- [Notebook 1] The markdown description imports list mentions "pandas" as a
+  required library, but pandas is neither imported nor used. Minor
+  documentation inconsistency.
+- [Notebook 2] No side-by-side convergence comparison for M1, M2, M3; losses
+  are printed textually and scatter plots are shown individually, but a
+  combined convergence plot would make the comparison more explicit.
+- [Notebook 2] Feature normalization (normalize_features) is applied
+  inside the model loop but the normalization parameters (mu, sigma) for
+  inference in section 8 come from the last loop iteration (M3), which is
+  correct but implicit and not explicitly documented.
+
+------------------------------------------------------------------------
+TA FEEDBACK TO STUDENT
+------------------------------------------------------------------------
+This is a solid, well-structured submission that clearly demonstrates
+understanding of regression from first principles. The mathematical
+derivations are presented alongside their code equivalents, and the
+conceptual questions show genuine engagement with the astrophysical domain.
+
+The most important fix for a resubmission would be in Notebook 1: add a
+gradient_descent_loop function that calls compute_gradients_loop and runs
+a complete training loop. Compare its output (loss curve or final parameters)
+to the vectorized version to demonstrate that both approaches converge to the
+same solution — this is the pedagogical point of having both.
+
+In Notebook 2, consider adding a single plot that overlays the three
+convergence curves (M1, M2, M3) to make it immediately visually clear how
+the richer feature sets accelerate and lower the final loss. A brief comment
+explaining that the mu/sigma used for inference come from the M3 normalization
+would also improve readability.
+
+Overall, the work meets the assignment objectives and the cloud execution
+evidence is well-documented. Good job.
+
+------------------------------------------------------------------------
+AI-GENERATION ASSESSMENT  (NON-GRADING — informational only)
+------------------------------------------------------------------------
+
+A. Qualitative Assessment
+
+Indicators suggesting AI assistance:
+- Markdown explanations follow a highly uniform template structure across
+  both notebooks (Objective → Importing libraries → Defining Dataset →
+  numbered sections).
+- Formula-to-code transitions are consistently clean with no intermediate
+  debugging artifacts, exploratory dead ends, or commented-out experiments.
+- Section titles and explanations use generic, textbook-style phrasing
+  (e.g., "This plot shows how the loss decreases over training iterations").
+- The "pandas" mention in both notebooks' library descriptions (without
+  actual use) suggests boilerplate text was carried over uncritically.
+
+Indicators suggesting human authorship:
+- The specific choice of stellar mass values (0.6–2.4 M_sun) and the explicit
+  reference to L ∝ M^3.5 in the conceptual section reflect domain awareness.
+- The inference example (M=1.3, T=6600 K) is accompanied by a custom
+  reasonableness analysis cross-checking the prediction against training data
+  bounds, showing genuine critical thinking.
+- The gap in the non-vectorized GD section (function defined but not used)
+  is the kind of oversight more typical of human work than AI generation.
+
+B. Quantitative Estimate
+   Code:               ~55%  AI-assisted
+   Explanations / markdown:  ~65%  AI-assisted
+   README:             ~50%  AI-assisted
+
+C. Commentary
+The project shows a moderate level of AI assistance, primarily in generating
+boilerplate markdown explanations and scaffolding the notebook structure.
+The core numerical implementations (gradient loops, vectorized operations,
+feature engineering) appear to have been written with genuine understanding,
+as evidenced by correct mathematical formulations and a domain-specific
+reasonableness analysis. The repetitive section headings and the unused
+"pandas" reference in both notebooks suggest portions of the prose were
+generated or adapted from a common template with limited manual editing.
+
+"This assessment is observational and does not imply misconduct."
+
+================================================================================
